@@ -3,36 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linkit2me App</title>
+    <title>Linkit2me</title>
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background-color: #1a1a1a; color: white; display: flex; align-items: center; justify-content: center; font-family: sans-serif; }
-        canvas { width: 100%; height: 100%; position: absolute; }
-        #status { z-index: 10; }
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background-color: #000000; }
+        canvas { width: 100%; height: 100%; outline: none; }
+        #loading { color: white; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: sans-serif; }
     </style>
 </head>
 <body>
-    <div id="status">جاري تشغيل التطبيق...</div>
+    <div id="loading">جاري تحميل التطبيق...</div>
     <canvas id="ComposeTarget"></canvas>
-
-    <script>
-        // مراقب للأخطاء - إذا صار مشكلة رح يكتبها عالشاشة
-        window.onerror = function(msg, url, line) {
-            document.getElementById('status').innerText = "خطأ: " + msg + " في السطر " + line;
-            return false;
-        };
-    </script>
 
     <script src="skiko.js"></script>
     <script src="linkit2me.js"></script>
-    
+
     <script>
-        // إخفاء كلمة "جاري التشغيل" بعد ثواني
-        setTimeout(() => {
-            const status = document.getElementById('status');
-            if (status.innerText.includes("جاري")) {
-                status.innerText = "إذا استمرت الشاشة بيضاء، اضغط F12 وشوف الـ Console";
-            }
-        }, 5000);
+        // إخفاء رسالة التحميل بعد ثوانٍ من التشغيل
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loading');
+                if (loader) loader.style.display = 'none';
+            }, 3000);
+        });
     </script>
 </body>
 </html>
